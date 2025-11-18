@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* ===== Global Scrollbar Styling ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    /* scrollbar width */
+    height: 8px;
+    /* horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-track {
+    background: #0b0a0d;
+    /* background color of track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #8EF6E7, #B69BFF, #FFB8E6);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7fe1d4, #a88eff, #ff9edd);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #00aaff #0b0a0d;
+}
