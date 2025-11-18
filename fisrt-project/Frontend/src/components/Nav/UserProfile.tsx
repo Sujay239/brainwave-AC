@@ -32,16 +32,22 @@ const UserProfile = () => {
     }
   }
 
+  function handleProfile(event: React.MouseEvent<HTMLButtonElement>): void {
+    event.preventDefault();
+    navigate("/profile");
+  }
+
   return (
     <div className="flex flex-wrap lg:justify-between gap-8 items-center justify-around">
-      <div
-        className={`w-10 h-10 text-white font-semibold flex justify-center items-center text-[20px] rounded-full`}
+      <button
+        className={`w-10 h-10 text-white font-semibold flex justify-center items-center text-[20px] rounded-full cursor-pointer hover:scale-125 transition-transform hover:border-cyan-500 hover:border-2`}
         style={{
           backgroundColor: color,
         }}
+        onClick={handleProfile}
       >
         {nameChar}
-      </div>
+      </button>
       <button onClick={handleLogout}>
         <GradientButton
           text="Log Out"

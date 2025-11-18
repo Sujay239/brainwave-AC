@@ -6,6 +6,7 @@ import App from './App.tsx'
 import LoginForm from './components/Authentication/LoginForm.tsx'
 import RegisterForm from './components/Authentication/Register.tsx'
 import NotFound from './components/NotFound.tsx'
+import ProfileSection from './components/ProfileSection.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path='/profile' element = {<ProfileSection />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>

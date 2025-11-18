@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const generateToken = require("./generateToken");
 const cookieParser = require("cookie-parser");
 const isLoggedIn = require("./middleware/isLoggedIn");
+const jwt = require('jsonwebtoken');
 const passwordMatcher = require("./middleware/passwordMatcher");
 require("dotenv").config();
 const cors = require("cors");
@@ -33,16 +34,17 @@ app.get("/", isLoggedIn, (req, res) => {
 app.post("/create-user", async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    const Email = email.toLowerCase();
     const hash = await encodePassword(password);
     const q = "SELECT * FROM users WHERE email = ?";
-   const [rows] =  await db.query(q,[email]);
+   const [rows] =  await db.query(q,[Email]);
    if(rows && rows.length > 0){
    return res.status(409).json({error : "User already exists with this email, please try again with different eamil id."});
    }
     const sql =
       "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
     console.log(hash);
-    db.query(sql, [name, email, hash]);
+    db.query(sql, [name, Email, hash]);
     res.send("User created successfully please log in");
   } catch (err) {
     res.status(401).send(`Error occurred in inserting users ${err}`);
@@ -53,9 +55,11 @@ app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
+     const Email = email.toLowerCase();
+
     // --- Fetch User ---
     const query = "SELECT * FROM users WHERE email = ?";
-    const [rows] = await db.query(query, [email]);
+    const [rows] = await db.query(query, [Email]);
 
     if (!rows || rows.length === 0) {
       return res.status(401).json({
@@ -74,12 +78,11 @@ app.post("/login", async (req, res) => {
     }
 
     // --- Generate Token ---
-    const token = await generateToken(user.username, user.email);
+    const token = await generateToken(user.username, Email);
 
     // --- Send Cookie to Browser ---
     res.cookie("token", token, {
       httpOnly: true, // IMPORTANT: protects token
-      secure: true, // set true in production (HTTPS)
       sameSite: "lax",
     });
 
@@ -97,9 +100,19 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/api/me", (req, res) => {
+  try{
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  res.status(200).json({ user: decoded });
+  }catch(err){
+    res.status(401).send({error : "unauthorized"});
+  }
+});
+
 
 app.post('/logout' , (req,res) => {
-    res.clearCookie("token", {
+    res.clearCookie("token",null, {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
