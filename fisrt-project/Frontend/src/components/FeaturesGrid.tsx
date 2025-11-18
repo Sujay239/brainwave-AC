@@ -5,12 +5,12 @@ import messageBubble from "../assets/Ask anything.svg";
 import arrow from "../assets/Improve everyday.svg";
 import globe from "../assets/Connect everywhere.svg";
 import bolt from "../assets/Fast responding.svg";
-import image1 from "../assets/benefits/card-1.svg";
-import image2 from "../assets/benefits/card-1.svg";
-import image3 from "../assets/benefits/card-1.svg";
-import image4 from "../assets/benefits/card-1.svg";
-import image5 from "../assets/benefits/card-1.svg";
-import image6 from "../assets/benefits/card-1.svg";
+// import image1 from "../assets/benefits/card-1.svg";
+// import image2 from "../assets/benefits/card-1.svg";
+// import image3 from "../assets/benefits/card-1.svg";
+// import image4 from "../assets/benefits/card-1.svg";
+// import image5 from "../assets/benefits/card-1.svg";
+// import image6 from "../assets/benefits/card-1.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -152,14 +152,12 @@ const FeaturesGrid: React.FC = () => {
         >
           {featuresData.map((feature, index) => (
             <div
-              className={`w-full h-full bg-[url${image5}]`}
-              style={{
-                backgroundImage: `url(${image4})`,
-              }}
+              className={`w-full h-full`}
+             
             >
               <article
                 key={index}
-                className={`rounded-2xl p-px m-4 transition-transform duration-300 ease-in-out hover:-translate-y-1`}
+                className={`rounded-2xl p-px m-4 bg-linear-to-r ${feature.gradientBorder} transition-transform duration-300 ease-in-out hover:-translate-y-1`}
               >
                 <div className="bg-[#18181b] rounded-[15px] p-6 h-full flex flex-col">
                   <h3 className="text-2xl font-semibold text-white mb-2">
