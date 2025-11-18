@@ -33,7 +33,7 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-between gap-8 items-center">
+    <div className="flex flex-wrap lg:justify-between gap-8 items-center justify-around">
       <div
         className={`w-10 h-10 text-white font-semibold flex justify-center items-center text-[20px] rounded-full`}
         style={{

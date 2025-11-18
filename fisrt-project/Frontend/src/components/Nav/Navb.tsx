@@ -109,7 +109,7 @@ const Navb: React.FC = () => {
           </div>
         )}
         {token && (
-          <div ref={authRef} className="flex items-center">
+          <div ref={authRef} className=" items-center lg:block hidden">
             <UserProfile />
           </div>
         )}
