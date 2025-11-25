@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@mantine/core": "^8.3.9",
+    "@mantine/hooks": "^8.3.9",
+    "@tabler/icons-react": "^3.35.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/jwt-decode": "^2.2.1",
+    "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0"
+  }
+}
